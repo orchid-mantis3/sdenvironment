@@ -1,15 +1,16 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="styles.css">
-    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-app-compat.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-auth-compat.js"></script>
-    <script src="script.js" type="module"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Lora:ital,wght@0,400..700;1,400..700&family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap" rel="stylesheet">
-    <title>San Diego Local Efforts</title>
+    <!DOCTYPE html>
+    <html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="styles.css">
+        <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Lora:ital,wght@0,400..700;1,400..700&family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap" rel="stylesheet">
+        <title>San Diego Local Efforts</title>
+        <script type="module" src="firebase.js"></script>
+        <script type="module" src="script.js"></script>
     <style>
         body {
             background-color: #F5F5DC; 
@@ -113,10 +114,9 @@
         <nav class="main-nav">
           <ul>
             <li><a href="carbon_calculator.html">Carbon Footprint</a></li>
-            <li><a href="#">History</a></li>
+            <li><a href="historypg.html">History</a></li>
             <li><a href="rewards.html">Rewards</a></li>
             <li><a href="localefforts.html">Local Efforts</a></li>
-            <li><a href="#">Donate</a></li>
             <li><button id="sign-in-button">Sign In</button></li>
             <li id="user-info-container" style="display: none;">
                 <span id="user-info">
@@ -133,16 +133,12 @@
           </ul>
         </nav>
       </header>
-      <div id="header-placeholder" style="height: 0;"></div> <!-- Placeholder element -->
-
+      <div id="header-placeholder" style="height: 0;"></div> 
     <h1>Local Efforts</h1>
-
-    <!-- Search bar -->
     <div class="search-container">
         <input type="text" id="searchInput" placeholder="Search for an effort..." onkeyup="filterEfforts()">
     </div>
 
-    <!-- Filter bar -->
     <div class="filter-container">
         <label for="categoryFilter">Filter by Category:</label>
         <select id="categoryFilter" onchange="filterEfforts()">
@@ -154,12 +150,9 @@
         </select>
     </div>
 
-    <!-- Efforts container -->
     <div class="efforts-container" id="effortsContainer">
-        <!-- Effort items will be dynamically inserted here -->
     </div>
 
-    <!-- Pagination -->
     <div class="pagination">
         <button onclick="navigate(-1)">Previous</button>
         <button onclick="navigate(1)">Next</button>

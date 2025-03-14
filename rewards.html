@@ -1,33 +1,17 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Points</title>
-    <link rel="stylesheet" href="styles.css">
-    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-app-compat.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-auth-compat.js"></script>
-    <script src="script.js" type="module"></script>
-    <script src="reward.js"></script> <!-- Load reward.js after script.js -->
-    <script>
-      // Call the displayUserPoints function when the rewards page loads and auth state is ready
-      document.addEventListener('DOMContentLoaded', function () {
-        if (window.location.pathname.includes("rewards.html")) {
-          // Use onAuthStateChanged to ensure auth state is ready
-          auth.onAuthStateChanged((user) => {
-            if (user) {
-              // User is signed in, fetch and display points
-              displayUserPoints();
-            } else {
-              console.log("User is not signed in. Points will not be displayed.");
-            }
-          });
-        }
-      });
-    </script>
-    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Lora:ital,wght@0,400..700;1,400..700&family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap" rel="stylesheet">
-</head>
+  <!DOCTYPE html>
+  <html lang="en">
+  <head>
+      <meta charset="UTF-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <title>Points</title>
+      <link rel="stylesheet" href="styles.css">
+      <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap" rel="stylesheet">
+      <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Lora:ital,wght@0,400..700;1,400..700&family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap" rel="stylesheet">
+      <script type="module" src="firebase.js"></script>
+      <script type="module" src="script.js"></script>
+  </head>
 <body>
     <header class="main-header">
         <div class="logo">
@@ -36,10 +20,9 @@
         <nav class="main-nav">
             <ul>
                 <li><a href="carbon_calculator.html">Carbon Footprint</a></li>
-                <li><a href="#">History</a></li>
+                <li><a href="historypg.html">History</a></li>
                 <li><a href="rewards.html">Rewards</a></li>
                 <li><a href="localefforts.html">Local Efforts</a></li>
-                <li><a href="#">Donate</a></li>
                 <li><button id="sign-in-button">Sign In</button></li>
                 <li id="user-info-container" style="display: none;">
                   <span id="user-info">
@@ -56,9 +39,8 @@
             </ul>
         </nav>
     </header>
-    <div id="header-placeholder" style="height: 0;"></div> <!-- Placeholder element -->
+    <div id="header-placeholder" style="height: 0;"></div>
 
-    <!-- Auth Modals -->
     <div id="signup-modal" class="auth-modal">
         <div class="auth-form">
             <span class="close-button" onclick="closeAuthModal('signup-modal')">×</span>
@@ -82,8 +64,6 @@
             <p>Don't have an account? <a href="#" onclick="openAuthModal('signup-modal'); closeAuthModal('signin-modal');">Sign Up</a></p>
         </div>
     </div>
-
-    <!-- Rewards Content -->
     <div class="rewards-content">
         <h1>Points</h1>
         <p>Here you can see your plant grow as you gain more and more points</p>

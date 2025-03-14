@@ -8,7 +8,7 @@ const plantImages = [
 function checkPointsThreshold(points) {
   if (points >= 40) {
     alert('Congratulations! You grew an entire plant! You can start growing a new plant now.');
-    updatePlantImage(points); // Call the globally accessible function
+    updatePlantImage(points);
   }
 }
 
@@ -17,10 +17,9 @@ function updatePointsDisplay(points) {
   if (pointsDisplayElement) {
     pointsDisplayElement.textContent = points;
   }
-  updatePlantImage(points); // Call the globally accessible function
+  updatePlantImage(points); 
 }
 
 window.onload = function () {
-  // Fetch points from Firestore when the page loads
   displayUserPoints();
 };

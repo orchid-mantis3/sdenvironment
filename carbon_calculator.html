@@ -1,14 +1,17 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="styles.css">
-    <script type="module" src="script.js"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Lora:ital,wght@0,400..700;1,400..700&family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap" rel="stylesheet">
-    <title>Personal Carbon Emissions Calculator</title>
-</head>
+    <!DOCTYPE html>
+    <html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="styles.css">
+        <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Lora:ital,wght@0,400..700;1,400..700&family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap" rel="stylesheet">
+        <title>Personal Carbon Emissions Calculator</title>
+        <script type="module" src="firebase.js"></script>
+        <script type="module" src="script.js"></script>
+    </head>
 <body>
     <header class="main-header">
         <div class="logo">
@@ -17,10 +20,9 @@
         <nav class="main-nav">
             <ul>
                 <li><a href="carbon_calculator.html">Carbon Footprint</a></li>
-                <li><a href="#">History</a></li>
+                <li><a href="historypg.html">History</a></li>
                 <li><a href="rewards.html">Rewards</a></li>
                 <li><a href="localefforts.html">Local Efforts</a></li>
-                <li><a href="#">Donate</a></li>
                 <li><button id="sign-in-button">Sign In</button></li>
                 <li id="user-info-container" style="display: none;">
                   <span id="user-info">
@@ -37,9 +39,7 @@
             </ul>
         </nav>
     </header>
-    <div id="header-placeholder" style="height: 0;"></div> <!-- Placeholder element -->
-
-    <!-- Auth Modals -->
+    <div id="header-placeholder" style="height: 0;"></div>
     <div id="signup-modal" class="auth-modal">
         <div class="auth-form">
             <span class="close-button" onclick="closeAuthModal('signup-modal')">×</span>
@@ -63,8 +63,6 @@
             <p>Don't have an account? <a href="#" onclick="openAuthModal('signup-modal'); closeAuthModal('signin-modal');">Sign Up</a></p>
         </div>
     </div>
-
-    <!-- Calculator Content -->
     <div class="calculator-content" style="padding-top: 5%;">
         <h2>Personal Carbon Emissions Calculator</h2>
         <p><i>for San Diego residents</i></p>
@@ -94,7 +92,7 @@
             <option value="vegetarian">Vegetarian</option>
             <option value="vegan">Vegan</option>
         </select>
-        <button onclick="calculateEmissions()">Calculate CO2 Emissions</button>
+        <button id="calculate-button">Calculate CO2 Emissions</button>
 
         <p><i><small>(Yearly emissions, based on EPA guidelines)</small></i></p>
         <p id="results"></p>

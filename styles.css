@@ -9,15 +9,15 @@ main {
   position: relative;
   z-index: 1;
 }
+
 #user-info {
   font-family: 'Playfair Display', serif;
-  font-size: 19px; 
+  font-size: 19px;
   color: #F5F5DC;
-  font-weight: bold; 
-  margin-left: 10px; 
-  transition: all 0.3s ease; 
+  font-weight: bold;
+  margin-left: 10px;
+  transition: all 0.3s ease;
 }
-
 
 .main-header {
   display: flex;
@@ -30,12 +30,12 @@ main {
   width: 100%;
   box-sizing: border-box;
   z-index: 100;
-  position: fixed; /* Make it fixed by default instead of using JS to add this */
+  position: fixed;
   top: 0;
 }
 
 #header-placeholder {
-  height: 100px; /* Match the expanded header height */
+  height: 100px;
 }
 
 .logo img {
@@ -109,64 +109,8 @@ main {
   padding: 5px 10px;
   position: absolute;
   z-index: 1001;
-  top: 100%; /* Changed from bottom: 125% to top: 100% to position it below */
+  top: 100%;
   left: 50%;
-  transform: translateX(-50%);
-  opacity: 0;
-  transition: opacity 0.3s ease;
-  width: max-content;
-  pointer-events: none;
-  margin-top: 5px; /* Add a small margin to separate from the GIF */
-}
-
-.tooltip::after {
-  content: "";
-  position: absolute;
-  bottom: 100%; /* Change from top: 100% to bottom: 100% */
-  left: 50%;
-  margin-left: -5px;
-  border-width: 5px;
-  border-style: solid;
-  border-color: transparent transparent #6B8E23 transparent; /* Flip the colors to point upward */
-}
-
-#user-info-container {
-  position: relative;
-  display: flex;
-  align-items: center;
-}
-
-/* Create a wrapper for the GIF and tooltip */
-#gif-tooltip-wrapper {
-  position: relative;
-  display: inline-block;
-}
-
-/* Style for the tooltip */
-#gif-tooltip-wrapper {
-  position: relative;
-  display: inline-block;
-  margin-left: 10px; /* Move margin from img to wrapper */
-}
-
-/* Remove any margin from the image itself */
-#gif-tooltip-wrapper img {
-  vertical-align: middle;
-  margin-left: 0; /* Remove margin from image */
-}
-
-/* Style for the tooltip */
-.tooltip {
-  visibility: hidden;
-  background-color: #6B8E23;
-  color: #F5F5DC;
-  text-align: center;
-  border-radius: 5px;
-  padding: 5px 10px;
-  position: absolute;
-  z-index: 1001;
-  top: 100%; /* Position below the element */
-  left: 50%; /* Center horizontally */
   transform: translateX(-50%);
   opacity: 0;
   transition: opacity 0.3s ease;
@@ -175,7 +119,6 @@ main {
   margin-top: 5px;
 }
 
-/* Arrow for the tooltip */
 .tooltip::after {
   content: "";
   position: absolute;
@@ -187,36 +130,88 @@ main {
   border-color: transparent transparent #6B8E23 transparent;
 }
 
-/* Show tooltip on hover */
+#user-info-container {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+#gif-tooltip-wrapper {
+  position: relative;
+  display: inline-block;
+}
+
+#gif-tooltip-wrapper {
+  position: relative;
+  display: inline-block;
+  margin-left: 10px;
+}
+
+#gif-tooltip-wrapper img {
+  vertical-align: middle;
+  margin-left: 0;
+}
+
+.tooltip {
+  visibility: hidden;
+  background-color: #6B8E23;
+  color: #F5F5DC;
+  text-align: center;
+  border-radius: 5px;
+  padding: 5px 10px;
+  position: absolute;
+  z-index: 1001;
+  top: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  width: max-content;
+  pointer-events: none;
+  margin-top: 5px;
+}
+
+.tooltip::after {
+  content: "";
+  position: absolute;
+  bottom: 100%;
+  left: 50%;
+  margin-left: -5px;
+  border-width: 5px;
+  border-style: solid;
+  border-color: transparent transparent #6B8E23 transparent;
+}
+
 #gif-tooltip-wrapper:hover .tooltip {
   visibility: visible;
   opacity: 1;
 }
-.mission-container {
-  margin-top: 50px; /* Adjust this value to create space between the header image and mission section */
+
+.left-container {
+  margin-top: 50px;
   padding: 5%;
 }
 
-.mission {
+.left {
   display: flex;
   flex-direction: row;
   align-items: center;
   gap: 20px;
-  max-width: 1200px; 
-  margin: 0 auto; 
+  max-width: 1200px;
+  margin: 0 auto;
 }
 
-.mission img {
-  width: 60%; /* Increased width for better prominence */
+.left img {
+  width: 60%;
   height: auto;
-  border-radius: 8px;
+  border-radius: 30px;
   padding: 20px;
   max-width: 800px;
   margin: 0 auto;
 }
 
-.mission .content {
-  width: 40%; /* Adjusted width for text content */
+.left .content {
+  width: 40%;
   padding: 20px;
 }
 
@@ -232,40 +227,41 @@ main {
   font-family: "Lora", serif !important;
 }
 
-.localefforts-container {
+.right-container {
   background-color: #8A9A5B;
   padding: 5%;
 }
 
-.localefforts {
+.right {
   display: flex;
   flex-direction: row-reverse;
   align-items: center;
   gap: 20px;
-  max-width: 1200px; 
+  max-width: 1200px;
   margin: 0 auto;
 }
 
-.localefforts img {
-  width: 60%; 
+.right img {
+  width: 60%;
   height: auto;
-  border-radius: 8px;
+  border-radius: 30px;
   padding: 20px;
   max-width: 800px;
   margin: 0 auto;
 }
 
-.localefforts .content {
+.right .content {
   width: 40%;
   padding: 20px;
 }
 
-.localefforts p {
+.right p {
   color: #F5F5DC;
   line-height: 1.6;
   font-size: 18px;
 }
-.localefforts button{
+
+.right button {
   background-color: #6B8E23;
   color: #F5F5DC;
   border: none;
@@ -279,8 +275,8 @@ main {
 }
 
 .effort a {
-  text-decoration: none; 
-  color: inherit; 
+  text-decoration: none;
+  color: inherit;
 }
 
 .effort a:visited p {
@@ -375,15 +371,15 @@ main {
   overflow: hidden;
   margin: 0;
   padding: 0;
-  height: 500px; 
+  height: 500px;
 }
 
 .welcome-image img {
   width: 100%;
   height: 100%;
   display: block;
-  object-fit: cover; 
-  object-position: center; 
+  object-fit: cover;
+  object-position: center;
 }
 
 .image-overlay {
@@ -392,72 +388,70 @@ main {
   left: 50%;
   transform: translate(-50%, -50%);
   text-align: center;
-  color: white; 
+  color: white;
   padding: 20px;
   border-radius: 8px;
-  font-family: 'Bebas Neue', sans-serif; 
+  font-family: 'Bebas Neue', sans-serif;
 }
 
 .image-overlay h2 {
-  font-size: 48px; 
+  font-size: 48px;
   margin: 0;
   letter-spacing: 2px;
 }
 
-/* For smaller screens */
 @media (max-width: 768px) {
   .welcome-image {
     height: 350px;
   }
 
-  .mission, .localefforts {
-    flex-direction: column; 
+  .left, .right {
+    flex-direction: column;
   }
 
-  .mission img, .localefforts img {
-    width: 100%; 
+  .left img, .right img {
+    width: 100%;
     padding: 10px;
   }
 
-  .mission .content, .localefforts .content {
-    width: 100%; 
+  .left .content, .right .content {
+    width: 100%;
     padding: 10px;
   }
 }
 
-/* For mobile devices */
 @media (max-width: 480px) {
   .welcome-image {
     height: 250px;
   }
 }
-  /* Carbon Calculator Page Styles */
+
 .calculator-content {
   max-width: 500px;
   margin: auto;
   padding: 20px;
   text-align: center;
-  background-color: #F5F5DC; /* Beige background */
+  background-color: #F5F5DC;
   border-radius: 8px;
   margin-top: 20px;
 }
 
 .calculator-content h2 {
-  color: #556B2F; /* Darker green for headings */
+  color: #556B2F;
   font-family: 'Playfair Display', serif;
   font-size: 28px;
   margin-bottom: 10px;
 }
 
 .calculator-content p {
-  color: #36454F; /* Dark gray for body text */
+  color: #36454F;
   font-family: 'Lora', serif;
   font-size: 16px;
   margin-bottom: 20px;
 }
 
 .calculator-content label {
-  color: #6B8E23; /* Medium green for labels */
+  color: #6B8E23;
   font-family: 'Playfair Display', serif;
   font-size: 18px;
   margin-bottom: 5px;
@@ -469,17 +463,17 @@ main {
   width: 100%;
   padding: 10px;
   margin: 10px 0;
-  border: 1px solid #8A9A5B; /* Light green border */
+  border: 1px solid #8A9A5B;
   border-radius: 4px;
   font-family: 'Lora', serif;
   font-size: 16px;
-  background-color: #F5F5DC; /* Beige background */
-  color: #36454F; /* Dark gray text */
+  background-color: #F5F5DC;
+  color: #36454F;
 }
 
 .calculator-content button {
-  background-color: #6B8E23; /* Medium green for buttons */
-  color: #F5F5DC; /* Light beige text */
+  background-color: #6B8E23;
+  color: #F5F5DC;
   border: none;
   padding: 12px 24px;
   font-family: 'Playfair Display', serif;
@@ -492,12 +486,12 @@ main {
 }
 
 .calculator-content button:hover {
-  background-color: #8A9A5B; /* Lighter green on hover */
-  color: #F5F5DC; /* Light beige text */
+  background-color: #8A9A5B;
+  color: #F5F5DC;
 }
 
 .calculator-content #results {
-  color: #36454F; /* Dark gray text */
+  color: #36454F;
   font-family: 'Lora', serif;
   font-size: 16px;
   margin-top: 20px;
@@ -506,10 +500,10 @@ main {
 }
 
 .calculator-content #results.has-results {
-  background-color: #8A9A5B; /* Light green background for results */
-  color: #F5F5DC; /* Light beige text */
+  background-color: #8A9A5B;
+  color: #F5F5DC;
 }
-/* Rewards Page Styles */
+
 .rewards-content {
   text-align: center;
   padding: 20px;
@@ -517,29 +511,47 @@ main {
 }
 
 .rewards-content h1 {
-  color: #6B8E23; /* Medium green for headings */
+  color: #6B8E23;
   font-family: 'Playfair Display', serif;
   font-size: 28px;
   margin-bottom: 10px;
 }
 
 .rewards-content p {
-  color: #36454F; /* Dark gray for body text */
+  color: #36454F;
   font-family: 'Lora', serif;
   font-size: 16px;
   margin-bottom: 20px;
 }
 
 .rewards-content img {
-  width: 200px; /* Adjust the size of the plant image */
+  width: 200px;
   height: auto;
   border-radius: 8px;
   margin-bottom: 20px;
 }
 
 .rewards-content #pointsDisplay {
-  color: #6B8E23; /* Medium green for points display */
+  color: #6B8E23;
   font-family: 'Playfair Display', serif;
   font-size: 24px;
   font-weight: bold;
+}
+
+.left button {
+  background-color: #6B8E23;
+  color: #F5F5DC;
+  border: none;
+  padding: 12px 24px;
+  font-family: 'Playfair Display', serif;
+  font-weight: bold;
+  font-size: 19px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  border-radius: 4px;
+}
+
+.left button:hover {
+  background-color: #FFDB58;
+  color: #36454F;
 }

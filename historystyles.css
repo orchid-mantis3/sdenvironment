@@ -1,0 +1,89 @@
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: 'Lora', serif;
+    color: #2c3e50;
+    line-height: 1.6;
+    background-color: #f9f9f9;
+}
+
+h1, h2, h3 {
+    font-family: 'Bebas Neue', sans-serif;
+    color: white;
+    letter-spacing: 2px;
+    font-size: 3.5rem;
+    margin-bottom: 1rem;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+}
+
+p {
+    font-family: 'Lora', serif;
+    color: white;
+    font-size: 1.1rem;
+    margin: 1rem 0;
+    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5);
+}
+
+.intro {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+}
+
+.left {
+    max-width: 50%;
+}
+
+.right {
+    max-width: 40%;
+}
+
+.hero {
+    position: relative;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    background-size: cover;
+    background-position: center;
+}
+
+.overlay {
+    background: rgba(0, 0, 0, 0.5);
+    padding: 2rem;
+    border-radius: 10px;
+    margin: 10%;
+    color: white;
+}
+
+.nav-links {
+    justify-content: left;
+}
+
+.water { background-image: url('images/water.jpg'); }
+.air { background-image: url('images/air.jpg'); }
+.marine { background-image: url('images/marine.jpg'); }
+.fire { background-image: url('images/fire.jpg'); }
+.intro { background-image: url('images/tree.jpg'); }
+
+.button {
+    background: #88C9A1;
+    color: white;
+    padding: 12px 24px;
+    text-decoration: none;
+    font-size: 1.1rem;
+    border-radius: 5px;
+    display: inline-block;
+    margin-top: 10px;
+    margin: 5px;
+    font-family: 'Bebas Neue', sans-serif;
+    letter-spacing: 1px;
+    transition: background 0.3s ease;
+}
+
+.button:hover {
+    background: #6AAE84;
+}
