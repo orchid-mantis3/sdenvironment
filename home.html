@@ -10,10 +10,24 @@
     <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Lora:ital,wght@0,400..700;1,400..700&family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap" rel="stylesheet">
     <!-- Favicon -->
     <link rel="icon" type="image/x-icon" href="./imgs/favicon.ico">
-  
-    <!-- Firebase SDK -->
-    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-app-compat.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-auth-compat.js"></script>
+    <script type="module">
+      import { initializeApp } from "https://www.gstatic.com/firebasejs/9.22.0/firebase-app.js";
+      import { getAuth } from "https://www.gstatic.com/firebasejs/9.22.0/firebase-auth.js";
+      import { getFirestore } from "https://www.gstatic.com/firebasejs/9.22.0/firebase-firestore.js";
+
+      const firebaseConfig = {
+        apiKey: "AIzaSyDNJVYoZZMMiL3khlCVDCIPU_3shq6Sl0w",
+        authDomain: "env-web-ec36d.firebaseapp.com",
+        projectId: "env-web-ec36d",
+        storageBucket: "env-web-ec36d.appspot.com",
+        messagingSenderId: "594340739099",
+        appId: "1:594340739099:web:1eb969713576bd12d820be"
+      };
+
+      const app = initializeApp(firebaseConfig);
+      const auth = getAuth(app);
+      const db = getFirestore(app);
+    </script>
   </head>
 <body>
   <header class="main-header">
@@ -22,7 +36,7 @@
     </div>
     <nav class="main-nav">
       <ul>
-        <li><a href="#">Carbon Footprint</a></li>
+        <li><a href="carbon_calculator.html">Carbon Footprint</a></li>
         <li><a href="#">History</a></li>
         <li><a href="rewards.html">Rewards</a></li>
         <li><a href="localefforts.html">Local Efforts</a></li>
@@ -31,7 +45,13 @@
         <li><button id="sign-in-button">Sign In</button></li>
         <!-- User info shown when user is signed in - hidden by default -->
         <li id="user-info-container" style="display: none;">
-          <span id="user-info">Welcome, User</span>
+          <span id="user-info">
+            Welcome, User
+          </span>
+          <div id="gif-tooltip-wrapper">
+            <img src="./imgs/94db8cefb34996b00c1f17f76e185031.gif" style="width: 50px; height: 50px; vertical-align: middle;" alt="plant">
+            <div id="plant-tooltip" class="tooltip">Plants grown: <span id="plant-count">1</span></div>
+          </div>
         </li>
         <li id="sign-out-container" style="display: none;">
           <button id="sign-out-button">Sign Out</button>
@@ -99,8 +119,6 @@
       <p>Don't have an account? <a href="#" onclick="openAuthModal('signup-modal'); closeAuthModal('signin-modal');">Sign Up</a></p>
     </div>
   </div>
-
-  <!-- Your custom script -->
-  <script src="script.js"></script>
+  <script type="module" src="script.js"></script>
 </body>
 </html>

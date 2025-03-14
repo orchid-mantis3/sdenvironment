@@ -9,6 +9,15 @@ main {
   position: relative;
   z-index: 1;
 }
+#user-info {
+  font-family: 'Playfair Display', serif;
+  font-size: 19px; 
+  color: #F5F5DC;
+  font-weight: bold; 
+  margin-left: 10px; 
+  transition: all 0.3s ease; 
+}
+
 
 .main-header {
   display: flex;
@@ -91,6 +100,98 @@ main {
   height: 40px;
 }
 
+.tooltip {
+  visibility: hidden;
+  background-color: #6B8E23;
+  color: #F5F5DC;
+  text-align: center;
+  border-radius: 5px;
+  padding: 5px 10px;
+  position: absolute;
+  z-index: 1001;
+  top: 100%; /* Changed from bottom: 125% to top: 100% to position it below */
+  left: 50%;
+  transform: translateX(-50%);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  width: max-content;
+  pointer-events: none;
+  margin-top: 5px; /* Add a small margin to separate from the GIF */
+}
+
+.tooltip::after {
+  content: "";
+  position: absolute;
+  bottom: 100%; /* Change from top: 100% to bottom: 100% */
+  left: 50%;
+  margin-left: -5px;
+  border-width: 5px;
+  border-style: solid;
+  border-color: transparent transparent #6B8E23 transparent; /* Flip the colors to point upward */
+}
+
+#user-info-container {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+/* Create a wrapper for the GIF and tooltip */
+#gif-tooltip-wrapper {
+  position: relative;
+  display: inline-block;
+}
+
+/* Style for the tooltip */
+#gif-tooltip-wrapper {
+  position: relative;
+  display: inline-block;
+  margin-left: 10px; /* Move margin from img to wrapper */
+}
+
+/* Remove any margin from the image itself */
+#gif-tooltip-wrapper img {
+  vertical-align: middle;
+  margin-left: 0; /* Remove margin from image */
+}
+
+/* Style for the tooltip */
+.tooltip {
+  visibility: hidden;
+  background-color: #6B8E23;
+  color: #F5F5DC;
+  text-align: center;
+  border-radius: 5px;
+  padding: 5px 10px;
+  position: absolute;
+  z-index: 1001;
+  top: 100%; /* Position below the element */
+  left: 50%; /* Center horizontally */
+  transform: translateX(-50%);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  width: max-content;
+  pointer-events: none;
+  margin-top: 5px;
+}
+
+/* Arrow for the tooltip */
+.tooltip::after {
+  content: "";
+  position: absolute;
+  bottom: 100%;
+  left: 50%;
+  margin-left: -5px;
+  border-width: 5px;
+  border-style: solid;
+  border-color: transparent transparent #6B8E23 transparent;
+}
+
+/* Show tooltip on hover */
+#gif-tooltip-wrapper:hover .tooltip {
+  visibility: visible;
+  opacity: 1;
+}
 .mission-container {
   margin-top: 50px; /* Adjust this value to create space between the header image and mission section */
   padding: 5%;
@@ -146,7 +247,7 @@ main {
 }
 
 .localefforts img {
-  width: 60%; /* Increased width for better prominence */
+  width: 60%; 
   height: auto;
   border-radius: 8px;
   padding: 20px;
@@ -155,7 +256,7 @@ main {
 }
 
 .localefforts .content {
-  width: 40%; /* Adjusted width for text content */
+  width: 40%;
   padding: 20px;
 }
 
@@ -175,6 +276,15 @@ main {
   cursor: pointer;
   transition: all 0.3s ease;
   border-radius: 4px;
+}
+
+.effort a {
+  text-decoration: none; 
+  color: inherit; 
+}
+
+.effort a:visited p {
+  color: #C1D8C3;
 }
 
 .auth-modal {
@@ -272,8 +382,8 @@ main {
   width: 100%;
   height: 100%;
   display: block;
-  object-fit: cover; /* Maintains aspect ratio while covering container */
-  object-position: center; /* Centers the image */
+  object-fit: cover; 
+  object-position: center; 
 }
 
 .image-overlay {
@@ -282,16 +392,16 @@ main {
   left: 50%;
   transform: translate(-50%, -50%);
   text-align: center;
-  color: white; /* Off-White for high contrast */
+  color: white; 
   padding: 20px;
   border-radius: 8px;
-  font-family: 'Bebas Neue', sans-serif; /* Apply Bebas Neue font */
+  font-family: 'Bebas Neue', sans-serif; 
 }
 
 .image-overlay h2 {
-  font-size: 48px; /* Larger font size for headings */
+  font-size: 48px; 
   margin: 0;
-  letter-spacing: 2px; /* Add some letter spacing for better readability */
+  letter-spacing: 2px;
 }
 
 /* For smaller screens */
@@ -301,16 +411,16 @@ main {
   }
 
   .mission, .localefforts {
-    flex-direction: column; /* Stack image and text vertically on smaller screens */
+    flex-direction: column; 
   }
 
   .mission img, .localefforts img {
-    width: 100%; /* Full width for images on smaller screens */
+    width: 100%; 
     padding: 10px;
   }
 
   .mission .content, .localefforts .content {
-    width: 100%; /* Full width for text content on smaller screens */
+    width: 100%; 
     padding: 10px;
   }
 }
@@ -320,4 +430,116 @@ main {
   .welcome-image {
     height: 250px;
   }
+}
+  /* Carbon Calculator Page Styles */
+.calculator-content {
+  max-width: 500px;
+  margin: auto;
+  padding: 20px;
+  text-align: center;
+  background-color: #F5F5DC; /* Beige background */
+  border-radius: 8px;
+  margin-top: 20px;
+}
+
+.calculator-content h2 {
+  color: #556B2F; /* Darker green for headings */
+  font-family: 'Playfair Display', serif;
+  font-size: 28px;
+  margin-bottom: 10px;
+}
+
+.calculator-content p {
+  color: #36454F; /* Dark gray for body text */
+  font-family: 'Lora', serif;
+  font-size: 16px;
+  margin-bottom: 20px;
+}
+
+.calculator-content label {
+  color: #6B8E23; /* Medium green for labels */
+  font-family: 'Playfair Display', serif;
+  font-size: 18px;
+  margin-bottom: 5px;
+  display: block;
+}
+
+.calculator-content input,
+.calculator-content select {
+  width: 100%;
+  padding: 10px;
+  margin: 10px 0;
+  border: 1px solid #8A9A5B; /* Light green border */
+  border-radius: 4px;
+  font-family: 'Lora', serif;
+  font-size: 16px;
+  background-color: #F5F5DC; /* Beige background */
+  color: #36454F; /* Dark gray text */
+}
+
+.calculator-content button {
+  background-color: #6B8E23; /* Medium green for buttons */
+  color: #F5F5DC; /* Light beige text */
+  border: none;
+  padding: 12px 24px;
+  font-family: 'Playfair Display', serif;
+  font-size: 18px;
+  cursor: pointer;
+  border-radius: 4px;
+  transition: all 0.3s ease;
+  width: 100%;
+  margin-top: 10px;
+}
+
+.calculator-content button:hover {
+  background-color: #8A9A5B; /* Lighter green on hover */
+  color: #F5F5DC; /* Light beige text */
+}
+
+.calculator-content #results {
+  color: #36454F; /* Dark gray text */
+  font-family: 'Lora', serif;
+  font-size: 16px;
+  margin-top: 20px;
+  padding: 10px;
+  border-radius: 4px;
+}
+
+.calculator-content #results.has-results {
+  background-color: #8A9A5B; /* Light green background for results */
+  color: #F5F5DC; /* Light beige text */
+}
+/* Rewards Page Styles */
+.rewards-content {
+  text-align: center;
+  padding: 20px;
+  margin-top: 20px;
+}
+
+.rewards-content h1 {
+  color: #6B8E23; /* Medium green for headings */
+  font-family: 'Playfair Display', serif;
+  font-size: 28px;
+  margin-bottom: 10px;
+}
+
+.rewards-content p {
+  color: #36454F; /* Dark gray for body text */
+  font-family: 'Lora', serif;
+  font-size: 16px;
+  margin-bottom: 20px;
+}
+
+.rewards-content img {
+  width: 200px; /* Adjust the size of the plant image */
+  height: auto;
+  border-radius: 8px;
+  margin-bottom: 20px;
+}
+
+.rewards-content #pointsDisplay {
+  color: #6B8E23; /* Medium green for points display */
+  font-family: 'Playfair Display', serif;
+  font-size: 24px;
+  font-weight: bold;
 }

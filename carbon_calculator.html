@@ -3,30 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Points</title>
     <link rel="stylesheet" href="styles.css">
-    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-app-compat.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-auth-compat.js"></script>
-    <script src="script.js" type="module"></script>
-    <script src="reward.js"></script> <!-- Load reward.js after script.js -->
-    <script>
-      // Call the displayUserPoints function when the rewards page loads and auth state is ready
-      document.addEventListener('DOMContentLoaded', function () {
-        if (window.location.pathname.includes("rewards.html")) {
-          // Use onAuthStateChanged to ensure auth state is ready
-          auth.onAuthStateChanged((user) => {
-            if (user) {
-              // User is signed in, fetch and display points
-              displayUserPoints();
-            } else {
-              console.log("User is not signed in. Points will not be displayed.");
-            }
-          });
-        }
-      });
-    </script>
+    <script type="module" src="script.js"></script>
     <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Lora:ital,wght@0,400..700;1,400..700&family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap" rel="stylesheet">
+    <title>Personal Carbon Emissions Calculator</title>
 </head>
 <body>
     <header class="main-header">
@@ -83,12 +64,40 @@
         </div>
     </div>
 
-    <!-- Rewards Content -->
-    <div class="rewards-content">
-        <h1>Points</h1>
-        <p>Here you can see your plant grow as you gain more and more points</p>
-        <img id="plantImage" class="reward-card" src="./plantimage/seed.png" alt="Plant Image">
-        <p>Your current points: <span id="pointsDisplay">0</span></p>
+    <!-- Calculator Content -->
+    <div class="calculator-content" style="padding-top: 5%;">
+        <h2>Personal Carbon Emissions Calculator</h2>
+        <p><i>for San Diego residents</i></p>
+        
+        <label>Car commute distance (km per month)</label>
+        <input type="number" id="car_distance" placeholder="Enter km">
+
+        <label>Plane travel distance (km per month)</label>
+        <input type="number" id="plane_distance" placeholder="Enter km">
+
+        <label>Other transport distance (km per month)</label>
+        <input type="number" id="other_distance" placeholder="Enter km">
+
+        <label>Monthly electricity consumption (kWh)</label>
+        <input type="number" id="electricity" placeholder="Enter kWh">
+
+        <label>Waste generated per week (kg)</label>
+        <input type="number" id="waste" placeholder="Enter kg">
+
+        <label>Meals per day</label>
+        <input type="number" id="meals" placeholder="Enter number of meals">
+
+        <label>Diet</label>
+        <select id="diet">
+            <option value="omnivore">Omnivore</option>
+            <option value="pescatarian">Pescatarian</option>
+            <option value="vegetarian">Vegetarian</option>
+            <option value="vegan">Vegan</option>
+        </select>
+        <button onclick="calculateEmissions()">Calculate CO2 Emissions</button>
+
+        <p><i><small>(Yearly emissions, based on EPA guidelines)</small></i></p>
+        <p id="results"></p>
     </div>
 </body>
 </html>

@@ -10,19 +10,20 @@ import {
   onAuthStateChanged 
 } from "firebase/auth";
 
-// Your web app's Firebase configuration
+// Firebase configuration
 const firebaseConfig = {
   apiKey: "AIzaSyDNJVYoZZMMiL3khlCVDCIPU_3shq6Sl0w",
   authDomain: "env-web-ec36d.firebaseapp.com",
   projectId: "env-web-ec36d",
-  storageBucket: "env-web-ec36d.firebasestorage.app",
+  storageBucket: "env-web-ec36d.appspot.com",
   messagingSenderId: "594340739099",
   appId: "1:594340739099:web:1eb969713576bd12d820be"
 };
 
 // Initialize Firebase
-const app = initializeApp(firebaseConfig);
-const auth = getAuth(app);
+firebase.initializeApp(firebaseConfig);
+const auth = firebase.auth();
+const db = firebase.firestore(); // Initialize Firestore
 
 // Export functions for authentication
 export function signUp(email, password) {
