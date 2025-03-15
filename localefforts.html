@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="en">
+    <!DOCTYPE html>
+    <html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="styles.css">
+        <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Lora:ital,wght@0,400..700;1,400..700&family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap" rel="stylesheet">
+        <title>San Diego Local Efforts</title>
+        <script type="module" src="firebase.js"></script>
+        <script type="module" src="script.js"></script>
+    <style>
+        body {
+            background-color: #F5F5DC; 
+            color: #36454F; 
+            font-family: 'Lora', serif;
+        }
+
+        h1 {
+            color: #6B8E23; 
+            font-family: 'Playfair Display', serif;
+            text-align: center;
+            margin-top: 20px;
+            padding-top: 5%;
+        }
+
+        /* Search and filter bars */
+        .search-container, .filter-container {
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .search-container input, .filter-container select {
+            padding: 10px;
+            border: 1px solid #8A9A5B; 
+            border-radius: 4px;
+            font-family: 'Lora', serif;
+            font-size: 16px;
+            background-color: #F5F5DC; 
+            color: #36454F; 
+        }
+
+        .filter-container label {
+            color: #6B8E23; 
+            font-family: 'Playfair Display', serif;
+            font-size: 18px;
+        }
+
+        /* Efforts container */
+        .efforts-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: flex-start; /* Changed from space-between to flex-start */
+            gap: 20px; 
+            padding: 20px;
+        }
+
+        .effort {
+            margin-bottom: 20px;
+            text-align: center;
+            background-color: #8A9A5B; 
+            border-radius: 8px;
+            padding: 10px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+        }
+
+        .effort img {
+            height: 200px; 
+            object-fit: contain;
+            border-radius: 8px;
+
+            background-color: #F5F5DC;
+        }
+
+        .effort p {
+            color: #F5F5DC;
+            font-family: 'Playfair Display', serif;
+            font-size: 18px;
+            margin-top: 10px;
+        }
+
+        /* Pagination */
+        .pagination {
+            margin-top: 20px;
+            text-align: center;
+        }
+
+        .pagination button {
+            margin: 5px;
+            padding: 10px 15px;
+            cursor: pointer;
+            background-color: #6B8E23; 
+            color: #F5F5DC; 
+            border: none;
+            border-radius: 4px;
+            font-family: 'Playfair Display', serif;
+            font-size: 16px;
+            transition: all 0.3s ease;
+        }
+
+        .pagination button:hover {
+            background-color: #FFDB58; 
+            color: #36454F; 
+        }
+    </style>
+</head>
+<body>
+    <header class="main-header">
+        <div class="logo">
+          <a href="home.html" style="text-decoration: none;"><img src="./imgs/koala.png" alt="website logo"></a>
+        </div>
+        <nav class="main-nav">
+          <ul>
+            <li><a href="carbon_calculator.html">Carbon Footprint</a></li>
+            <li><a href="historypg.html">History</a></li>
+            <li><a href="rewards.html">Rewards</a></li>
+            <li><a href="localefforts.html">Local Efforts</a></li>
+            <li><button id="sign-in-button">Sign In</button></li>
+            <li id="user-info-container" style="display: none;">
+                <span id="user-info">
+                  Welcome, User
+                </span>
+                <div id="gif-tooltip-wrapper">
+                  <img src="./imgs/94db8cefb34996b00c1f17f76e185031.gif" style="width: 50px; height: 50px; vertical-align: middle;" alt="plant">
+                  <div id="plant-tooltip" class="tooltip">plants grown: <span id="plant-count">1</span></div>
+                </div>
+              </li>
+            <li id="sign-out-container" style="display: none;">
+              <button id="sign-out-button">Sign Out</button>
+            </li>
+          </ul>
+        </nav>
+      </header>
+      <div id="header-placeholder" style="height: 0;"></div> 
+    <h1>Local Efforts</h1>
+    <div class="search-container">
+        <input type="text" id="searchInput" placeholder="Search for an effort..." onkeyup="filterEfforts()">
+    </div>
+
+    <div class="filter-container">
+        <label for="categoryFilter">Filter by Category:</label>
+        <select id="categoryFilter" onchange="filterEfforts()">
+            <option value="">All</option>
+            <option value="Climate">Climate</option>
+            <option value="Environmental Justice">Environmental Justice</option>
+            <option value="Wildlife">Wildlife</option>
+            <option value="Ocean Preservation">Ocean Preservation</option>
+        </select>
+    </div>
+
+    <div class="efforts-container" id="effortsContainer">
+    </div>
+
+    <div class="pagination">
+        <button onclick="navigate(-1)">Previous</button>
+        <button onclick="navigate(1)">Next</button>
+    </div>
+    <div id="signup-modal" class="auth-modal">
+        <div class="auth-form">
+          <span class="close-button" onclick="closeAuthModal('signup-modal')">×</span>
+          <h2>Sign Up</h2>
+          <div id="signup-error" class="error-message"></div>
+          <input type="email" id="signup-email" placeholder="Email">
+          <input type="password" id="signup-password" placeholder="Password">
+          <button id="submit-signup">Create Account</button>
+          <p>Already have an account? <a href="#" onclick="openAuthModal('signin-modal'); closeAuthModal('signup-modal');">Sign In</a></p>
+        </div>
+      </div>
+    
+      <div id="signin-modal" class="auth-modal">
+        <div class="auth-form">
+          <span class="close-button" onclick="closeAuthModal('signin-modal')">×</span>
+          <h2>Sign In</h2>
+          <div id="signin-error" class="error-message"></div>
+          <input type="email" id="signin-email" placeholder="Email">
+          <input type="password" id="signin-password" placeholder="Password">
+          <button id="submit-signin">Sign In</button>
+          <p>Don't have an account? <a href="#" onclick="openAuthModal('signup-modal'); closeAuthModal('signin-modal');">Sign Up</a></p>
+        </div>
+      </div>
+
+    <script>
+    // Define the efforts with categories
+        const allEfforts = [
+            { name: "Climate Action Campaign", image: "./localeffortimgs/effort1.jpg", link: "https://www.climateactioncampaign.org/", category: "Climate" },
+            { name: "San Diego Bird Alliance", image: "./localeffortimgs/effort2.jpg", link: "https://www.sandiegobirdalliance.org/what-we-do/overview.html#:~:text=Our%20work%20We%20seek%20to%20shape%20a,appreciating%20our%20local%20wildlife%20and%20their%20habitats.", category: "Wildlife" },
+            { name: "San Diego Zoo Wildlife Alliance", image: "./localeffortimgs/effort3.jpg", link: "https://sandiegozoowildlifealliance.org/", category: "Wildlife" },
+            { name: "Surfrider Foundation San Diego County", image: "./localeffortimgs/effort4.jpg", link: "https://sandiego.surfrider.org/", category: "Ocean Preservation" },
+            { name: "Environmental Health Coalition", image: "./localeffortimgs/effort5.jpg", link: "https://www.environmentalhealth.org/index.php/en/where-we-work/san-diego-region", category: "Environmental Justice" },
+            { name: "SanDiego350", image: "./localeffortimgs/effort6.jpg", link: "https://sandiego350.org/", category: "Climate" },
+            { name: "San Dieguito River Park Conservancy", image: "./localeffortimgs/effort7.jpg", link: "https://sdrvc.org/", category: "Environmental Justice" },
+            { name: "California Native Plant Society, San Diego Chapter", image: "./localeffortimgs/effort8.jpg", link: "https://www.cnpssd.org/", category: "Environmental Justice" },
+            { name: "San Diego Coastkeeper", image: "./localeffortimgs/effort9.png", link: "https://www.sdcoastkeeper.org/", category: "Ocean Preservation" },
+            { name: "Chaparral Lands Conservancy", image: "./localeffortimgs/effort10.png", link: "https://www.chaparralconservancy.org/", category: "Environmental Justice" },
+            { name: "Sierra Club San Diego", image: "./localeffortimgs/effort11.png", link: "http://sandiegosierraclub.org/ ", category: "Environmental Justice" },
+            { name: "San Diego River Park Foundation", image: "./localeffortimgs/effort12.png", link: "https://sandiegoriver.org/", category: "Ocean Preservation" },
+            { name: "River Park Foundation", image: "./localeffortimgs/effort12.png", link: "https://sandiegoriver.org/ ", category: "Community" },
+            { name: "San Diego Canyonlands", image: "./localeffortimgs/effort13.png", link: "https://www.sdcanyonlands.org/", category: "Environmental Justice" },
+            { name: "San Diego Habitat Conservancy", image: "./localeffortimgs/effort14.png", link: "https://www.sdhabitat.org/", category: "Environmental Justice" },
+            { name: "San Diego Green New Deal", image: "./localeffortimgs/effort15.jpg", link: "https://www.greennewdealsd.org/", category: "Climate" },
+            { name: "Wildcoast", image: "./localeffortimgs/effort16.jpg", link: "https://wildcoast.org/", category: "Climate" }
+        ];
+
+        let currentPage = 1;
+        const itemsPerPage = 9;  // Updated to 9 per page
+
+        // Display efforts based on the current page and filter conditions
+        function displayEfforts() {
+            const searchInput = document.getElementById('searchInput').value.toLowerCase();
+            const selectedCategory = document.getElementById('categoryFilter').value;
+            
+            const filteredEfforts = allEfforts.filter(effort => {
+                const matchesSearch = effort.name.toLowerCase().includes(searchInput);
+                const matchesCategory = !selectedCategory || effort.category === selectedCategory;
+                return matchesSearch && matchesCategory;
+            });
+
+            const startIndex = (currentPage - 1) * itemsPerPage;
+            const endIndex = startIndex + itemsPerPage;
+            const pageEfforts = filteredEfforts.slice(startIndex, endIndex);
+
+            const container = document.getElementById('effortsContainer');
+            container.innerHTML = ''; // Clear the container
+
+            pageEfforts.forEach(effort => {
+                const effortDiv = document.createElement('div');
+                effortDiv.classList.add('effort');
+                effortDiv.innerHTML = `
+                    <a href="${effort.link}" target="_blank" onclick="updateUserPoints('${effort.name}')">
+                        <img src="${effort.image}" alt="${effort.name}">
+                        <p>${effort.name}</p>
+                    </a>
+                `;
+                container.appendChild(effortDiv);
+            });
+        }
+
+        // Filter efforts based on search input and selected category
+        function filterEfforts() {
+            displayEfforts();
+        }
+
+        // Pagination logic to navigate between pages
+        function navigate(direction) {
+            currentPage += direction;
+            if (currentPage < 1) currentPage = 1;
+            const filteredEfforts = allEfforts.filter(effort => {
+                const searchInput = document.getElementById('searchInput').value.toLowerCase();
+                const selectedCategory = document.getElementById('categoryFilter').value;
+                return effort.name.toLowerCase().includes(searchInput) && 
+                    (!selectedCategory || effort.category === selectedCategory);
+            });
+            if (currentPage > Math.ceil(filteredEfforts.length / itemsPerPage)) currentPage = Math.ceil(filteredEfforts.length / itemsPerPage);
+            displayEfforts();
+        }
+        // Initial display of efforts
+        displayEfforts();
+    </script>
+</body>
+</html>
